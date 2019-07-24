@@ -4,6 +4,7 @@ from selenium import webdriver
 class Application:
     def __init__(self):
         self.wd = webdriver.Firefox()
+      # self.wd = webdriver.Chrome()
         self.wd.implicitly_wait(30)
 
     def logout(self):
