@@ -1,10 +1,10 @@
 from selenium import webdriver
 
-class Application:
 
+class Application:
     def __init__(self):
         self.wd = webdriver.Firefox()
-        self.wd.implicitly_wait(60)
+        self.wd.implicitly_wait(30)
 
     def logout(self):
         wd = self.wd
@@ -51,7 +51,6 @@ class Application:
     def open_home_page(self):
         wd = self.wd
         wd.get("http://localhost/addressbook/")
-
 
     def destroy(self):
         self.wd.quit()
