@@ -1,21 +1,16 @@
-from selenium import webdriver
-
-from fixture.session_contact import SessionContactHelper
 
 
-class ApplicationContactFixture:
+class ContactHelper:
 
-    def __init__(self):
-        self.wd = webdriver.Firefox()
-        self.wd.implicitly_wait(30)
-        self.session = SessionContactHelper(self)
+    def __init__(self, app):
+        self.app = app
 
     def move_back_home_page(self):
-        wd = self.wd
+        wd = self.app.wd
         wd.find_element_by_link_text("home").click()
 
-    def add_new_contacts(self, contact):
-        wd = self.wd
+    def add_new(self, contact):
+        wd = self.app.wd
         # add new contact
         wd.find_element_by_link_text("add new").click()
         # fill the form of new contact
@@ -53,10 +48,3 @@ class ApplicationContactFixture:
         # submit group creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         self.move_back_home_page()
-
-    def open_addressbook_page(self):
-        wd = self.wd
-        wd.get("http://localhost/addressbook/index.php")
-
-    def destroy(self):
-        self.wd.quit()
