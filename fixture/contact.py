@@ -48,11 +48,34 @@ class ContactHelper:
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         self.move_back_home_page()
 
-    # def delete_first_contact(self):
-    #     wd = self.app.wd
-    #     # select first contact
-    #     wd.find_element_by_name("selected[]").click()
-    #     # submit deletion
-    #     wd.find_element_by_xpath("//input[@value='Delete']").click()
-    #     wd.find_element_by_name("ok").click()
-    #     self.move_back_home_page()
+    def delete_first_contact(self):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
+        self.move_back_home_page()
+
+    def edit_first_contact_no_changes(self):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # edit contact
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        # submit changes
+        wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
+        self.move_back_home_page()
+
+    def edit_first_contact_changed(self, contact):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # edit contact
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("nickname").click()
+        wd.find_element_by_name("nickname").clear()
+        wd.find_element_by_name("nickname").send_keys(contact.nickname)
+        # submit changes
+        wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
+        self.move_back_home_page()
