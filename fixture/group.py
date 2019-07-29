@@ -18,16 +18,9 @@ class GroupHelper:
         self.return_to_groups_page()
 
     def fill_group_form(self, group):
-        # wd = self.app.wd
         self.change_field_value("group_name", group.name)
         self.change_field_value("group_header", group.header)
         self.change_field_value("group_footer", group.footer)
-        # wd.find_element_by_name("group_header").click()
-        # wd.find_element_by_name("group_header").clear()
-        # wd.find_element_by_name("group_header").send_keys(group.header)
-        # wd.find_element_by_name("group_footer").click()
-        # wd.find_element_by_name("group_footer").clear()
-        # wd.find_element_by_name("group_footer").send_keys(group.footer)
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
