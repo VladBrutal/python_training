@@ -1,10 +1,23 @@
 # -*- coding: utf-8 -*-
+
 from model.group import Group
 
 
 def test_add_group(app):
-    app.group.create(Group(name="Home Work 1", header="HW Header 1", footer="HW Footer 1"))
+    old_groups = app.group.get_group_list()
+    group = Group(name="New Group", header="NG Header", footer="NG Footer")
+    app.group.create(group)
+    new_groups = app.group.get_group_list()
+    assert len(old_groups) + 1 == len(new_groups)
+    old_groups.append(group)
+    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
 
 
 def test_add_empty_group(app):
-    app.group.create(Group(name="", header="", footer=""))
+    old_groups = app.group.get_group_list()
+    group = Group(name="", header="", footer="")
+    app.group.create(group)
+    new_groups = app.group.get_group_list()
+    assert len(old_groups) + 1 == len(new_groups)
+    old_groups.append(group)
+    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
