@@ -1,3 +1,5 @@
+from model.contact import Contact
+
 
 class ContactHelper:
 
@@ -31,7 +33,6 @@ class ContactHelper:
         self.change_field_value("email", contact.email)
         self.change_field_value("homepage", contact.homepage)
         self.change_field_value("address2", contact.address2)
-
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
@@ -68,3 +69,18 @@ class ContactHelper:
         wd = self.app.wd
         self.move_to_home_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.move_to_home_page()
+        # wd.find_elements_by_id("search_count")
+        contacts = []
+        for element in wd.find_elements_by_name("entry"):
+            contact_id = element.find_element_by_name("selected[]").get_attribute("value")
+            f_name = element.find_element_by_css_selector('[name] td:nth-of-type(3)').text
+            l_name = element.find_element_by_css_selector('[name] td:nth-of-type(2)').text
+            # contact_id = element.find_element_by_name("selected[]").get_attribute("id")
+            # l_name = element.find_element_by_xpath("//tr[3]/td[2]").text
+            # f_name = element.find_element_by_xpath("//tr[3]/td[3]").text
+            contacts.append(Contact(id=contact_id, firstname=f_name, lastname=l_name))
+        return contacts
