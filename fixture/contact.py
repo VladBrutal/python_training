@@ -76,11 +76,11 @@ class ContactHelper:
         # wd.find_elements_by_id("search_count")
         contacts = []
         for element in wd.find_elements_by_name("entry"):
-            contact_id = element.find_element_by_name("selected[]").get_attribute("value")
+            contact_id = element.find_element_by_name("selected[]").get_attribute("id")
             f_name = element.find_element_by_css_selector('[name] td:nth-of-type(3)').text
             l_name = element.find_element_by_css_selector('[name] td:nth-of-type(2)').text
             # contact_id = element.find_element_by_name("selected[]").get_attribute("id")
-            # l_name = element.find_element_by_xpath("//tr[3]/td[2]").text
-            # f_name = element.find_element_by_xpath("//tr[3]/td[3]").text
+            # l_name = element.find_element_by_xpath('//tr[3]/td[2]').text
+            # f_name = element.find_element_by_xpath('//tr[3]/td[3]').text
             contacts.append(Contact(id=contact_id, firstname=f_name, lastname=l_name))
         return contacts
