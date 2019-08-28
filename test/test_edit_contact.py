@@ -4,7 +4,7 @@ from model.contact import Contact
 from test.test_del_contact import precondition_contact_existence
 
 
-def test_edit_first_contact(app):
+def test_edit_some_contact(app):
     precondition_contact_existence(app)
     old_contacts = app.contact.get_contact_list()
     index = randrange(len(old_contacts))

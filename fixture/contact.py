@@ -50,6 +50,7 @@ class ContactHelper:
         self.select_contact_by_id(index)
         # submit deletion
         wd.find_element_by_xpath("//input[@value='Delete']").click()
+        # wd.find_element_by_name('Delete').click()
         wd.switch_to_alert().accept()
         wd.find_element_by_css_selector("div.msgbox")
         self.move_to_home_page()
@@ -60,14 +61,13 @@ class ContactHelper:
 
     def edit_contact_by_index(self, new_contact_data, index):
         wd = self.app.wd
-        self.select_contact_by_id(index)
+        self.move_to_home_page()
         # open editing form
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_xpath("(//img[@alt='Edit'])[%d]" % index).click()
         # fill contact from
         self.fill_contact_form(new_contact_data)
         # submit changes
         wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
-        self.move_to_home_page()
         self.contact_cache = None
 
     def select_contact_by_id(self, index):
@@ -88,14 +88,10 @@ class ContactHelper:
         if self.contact_cache is None:
             wd = self.app.wd
             self.move_to_home_page()
-            # wd.find_elements_by_id("search_count")
             self.contact_cache = []
             for element in wd.find_elements_by_name("entry"):
                 contact_id = element.find_element_by_name("selected[]").get_attribute("id")
                 f_name = element.find_element_by_css_selector('[name] td:nth-of-type(3)').text
                 l_name = element.find_element_by_css_selector('[name] td:nth-of-type(2)').text
-                # contact_id = element.find_element_by_name("selected[]").get_attribute("id")
-                # l_name = element.find_element_by_xpath('//tr[3]/td[2]').text
-                # f_name = element.find_element_by_xpath('//tr[3]/td[3]').text
                 self.contact_cache.append(Contact(id=contact_id, firstname=f_name, lastname=l_name))
         return list(self.contact_cache)
