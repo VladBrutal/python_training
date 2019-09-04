@@ -8,7 +8,8 @@ def test_edit_some_contact(app):
     precondition_contact_existence(app)
     old_contacts = app.contact.get_contact_list()
     index = randrange(len(old_contacts))
-    contact = Contact(firstname="Edited firstname", lastname="Edited lastname")
+    contact = Contact(firstname="Edited firstname", lastname="Edited lastname", home_phone="293847",
+                      mobile_phone="354679", work_phone="183756", secondary_phone="542000")
     contact.id = old_contacts[index].id
     app.contact.edit_contact_by_index(contact, index)
     assert len(old_contacts) == app.contact.count()
