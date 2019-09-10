@@ -5,7 +5,9 @@ class Contact:
 
     def __init__(self, firstname=None, middlename=None, lastname=None,
                  nickname=None, company=None, address=None,
-                 home_phone=None, mobile_phone=None, work_phone=None, secondary_phone=None, email=None,
+                 home_phone=None, mobile_phone=None, work_phone=None, secondary_phone=None,
+                 email=None, email2=None, email3=None,
+                 all_phones_from_home_page=None, all_email=None,
                  homepage=None, address2=None, id=None):
         self.firstname = firstname
         self.middlename = middlename
@@ -18,21 +20,26 @@ class Contact:
         self.work_phone = work_phone
         self.secondary_phone = secondary_phone
         self.email = email
+        self.email2 = email2
+        self.email3 = email3
         self.homepage = homepage
         self.address2 = address2
         self.id = id
+        self.all_phones_from_home_page = all_phones_from_home_page
+        self.all_email = all_email
 
     def __repr__(self):
-        return "%s:%s:%s" % (self.id, self.firstname, self.lastname)
+        return "%s:%s:%s:%s:%s:%s:%s" % (self.id, self.firstname, self.lastname, self.home_phone, self.mobile_phone,
+                                         self.work_phone, self.secondary_phone)
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) \
-               and self.firstname == other.firstname and self.lastname == other.lastname
+               and self.firstname == other.firstname and self.lastname == other.lastname \
+               and self.home_phone == other.home_phone and self.work_phone == other.work_phone \
+               and self.mobile_phone == other.mobile_phone and self.secondary_phone == other.secondary_phone
         # return (self.id is None or other.id is None or self.id == other.id) \
         #        and (self.firstname is None or other.firstname is None or self.firstname == other.firstname) \
         #        and (self.lastname is None or other.lastname is None or self.lastname == other.lastname)
-
-
 
     def id_or_max(self):
         if self.id:
