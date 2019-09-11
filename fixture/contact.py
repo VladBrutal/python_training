@@ -147,8 +147,8 @@ class ContactHelper:
         self.open_contact_view_by_index(index)
         text = wd.find_element_by_id("content").text
         home_phone = re.search("H: (.*)", text).group(1)
-        work_phone = re.search("W: (.*)", text).group(2)
-        mobile_phone = re.search("M: (.*)", text).group(3)
-        secondary_phone = re.search("P: (.*)", text).group(4)
+        mobile_phone = re.search("M: (.*)", text).group(1)
+        work_phone = re.search("W: (.*)", text).group(1)
+        secondary_phone = re.search("P: (.*)", text).group(1)
         return Contact(home_phone=home_phone, mobile_phone=mobile_phone,
                        work_phone=work_phone, secondary_phone=secondary_phone)
