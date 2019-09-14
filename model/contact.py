@@ -29,17 +29,14 @@ class Contact:
         self.all_email = all_email
 
     def __repr__(self):
-        return "%s:%s:%s:%s:%s:%s:%s" % (self.id, self.firstname, self.lastname, self.home_phone, self.mobile_phone,
-                                         self.work_phone, self.secondary_phone)
+        return "%s:%s:%s:%s:%s:%s:%s" % (self.id, self.firstname, self.lastname)
+
+    # self.home_phone, self.mobile_phone,
+    # self.work_phone, self.secondary_phone
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) \
-               and self.firstname == other.firstname and self.lastname == other.lastname \
-               and self.home_phone == other.home_phone and self.work_phone == other.work_phone \
-               and self.mobile_phone == other.mobile_phone and self.secondary_phone == other.secondary_phone
-        # return (self.id is None or other.id is None or self.id == other.id) \
-        #        and (self.firstname is None or other.firstname is None or self.firstname == other.firstname) \
-        #        and (self.lastname is None or other.lastname is None or self.lastname == other.lastname)
+               and self.firstname == other.firstname and self.lastname == other.lastname
 
     def id_or_max(self):
         if self.id:
