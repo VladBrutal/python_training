@@ -29,7 +29,8 @@ class Contact:
         self.all_email = all_email
 
     def __repr__(self):
-        return "%s:%s:%s:%s:%s:%s:%s" % (self.id, self.firstname, self.lastname)
+        return "%s:%s:%s:%s:%s:%s" % (self.id, self.firstname, self.lastname
+                                   , self.home_phone, self.homepage, self.email)
 
     # self.home_phone, self.mobile_phone,
     # self.work_phone, self.secondary_phone
