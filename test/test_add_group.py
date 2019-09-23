@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
 import pytest
-
 from model.group import Group
+# from data.add_group import constant_data as testdata
 import random
 import string
+
+# constant_data = [
+#     Group(name="name1", header="header1", footer="footer1"),
+#     Group(name="name2", header="header2", footer="footer2"),
+#     Group(name="name3", header="header3", footer="footer3"),
+# ]
 
 
 def random_string(prefix, maxlen):
