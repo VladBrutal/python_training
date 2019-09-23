@@ -3,6 +3,7 @@ import os.path
 import pytest
 from fixture.application import Application
 
+
 fixture = None
 target = None
 
@@ -32,5 +33,5 @@ def stop(request):
 
 
 def pytest_addoption(parser):
-    parser.addoption("--browser", action="store", default=("firefox"))
-    parser.addoption("--target", action="store", default=("target.json"))
+    parser.addoption('--browser', action='store', default=('firefox'))
+    parser.addoption('--target', action='store', default=('target.json'))
