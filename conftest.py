@@ -2,7 +2,7 @@ import json
 import os.path
 import pytest
 from fixture.application import Application
-
+import importlib
 
 fixture = None
 target = None
@@ -28,6 +28,7 @@ def stop(request):
     def fin():
         fixture.session.ensure_logout()
         fixture.destroy()
+
     request.addfinalizer(fin)
     return fixture
 
@@ -35,3 +36,16 @@ def stop(request):
 def pytest_addoption(parser):
     parser.addoption('--browser', action='store', default=('firefox'))
     parser.addoption('--target', action='store', default=('target.json'))
+
+
+def pytest_generate_tests(metafunc):  # metafunc-object which contains all information about test function.like fixture
+    for fixture in metafunc.fixturenames:
+        if fixture.startswith("data_"):
+            testdata = load_from_module(fixture[5:])  # load test data from module,
+            # which has the same name as fixture but cut on first 5 symbols
+            metafunc.parametrize(fixture, testdata, ids=[str(x) for x in testdata])
+            # using test data for parametrization of our test function
+
+
+def load_from_module(module):
+    return importlib.import_module("data.%s" % module).testdata
