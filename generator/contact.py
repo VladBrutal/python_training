@@ -69,4 +69,4 @@ with open(file, "w") as out:
     out.write(jsonpickle.encode(testdata))
 
 # with open(file, "w") as out:
-#     out.write(json.dumps(contact_test_data, default=lambda x: x.__dict__, indent=2))
+#     out.write(json.dumps(testdata, default=lambda x: x.__dict__, indent=2))
