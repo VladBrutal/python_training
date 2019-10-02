@@ -70,3 +70,6 @@ with open(file, "w") as out:
 
 # with open(file, "w") as out:
 #     out.write(json.dumps(testdata, default=lambda x: x.__dict__, indent=2))
+
+
+# -n7 -f data/con_test.json
