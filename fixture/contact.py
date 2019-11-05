@@ -1,3 +1,5 @@
+from selenium.webdriver.support.select import Select
+from fixture import group
 from model.contact import Contact
 import re
 
@@ -91,6 +93,15 @@ class ContactHelper:
         # self.select_contact_by_id(id)
         wd.find_element_by_xpath("(//img[@alt='Edit'])[%s]" % id).click()
         self.fill_contact_form(new_contact_data)
+        wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
+        self.move_to_home_page()
+        self.contact_cache = None
+
+    def link_c_to_g_by_id(self, id, group_id):
+        wd = self.app.wd
+        self.select_contact_by_id(id)
+        wd.find_element_by_xpath("//div[@id='content']/form[2]/div[4]/select").click()
+        Select(wd.find_element_by_xpath("//div[@id='content']/form[2]/div[4]/select")).select_by_visible_text("nameYip")
         wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
         self.move_to_home_page()
         self.contact_cache = None
